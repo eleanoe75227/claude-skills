@@ -5,12 +5,17 @@
 ## 目前收錄
 
 - **test-plan-builder**：依RFP需求、SA文件、會議紀錄與驗收條款，建立可雙向追溯的測試計畫。詳見該資料夾內的 SKILL.md。
+- **notebooklm**：透過 notebooklm-py CLI 操作 Google NotebookLM（建筆記本、加來源、問答、產生/下載各類產出）。轉載自 [teng-lin/notebooklm-py](https://github.com/teng-lin/notebooklm-py)（MIT 授權，v0.7.3），未修改。使用前需先安裝並登入：`uv tool install "notebooklm-py[browser]"` → `notebooklm login` → `notebooklm auth check --test --json`。登入憑證存在本機 `~/.notebooklm/`，請各自用自己的 Google 帳號登入，勿互相複製。
 
 ## 使用方式
 
 複製對應資料夾到你的 `.claude/skills/` 底下即可。內容供參考與調整，實際使用時請依自己專案的素材與情境判斷，不保證直接適用。
 
 ## 更新紀錄
+
+### notebooklm
+
+- **2026-10-10**：收錄（上游 notebooklm-py v0.7.3 原檔）。
 
 ### test-plan-builder
 
