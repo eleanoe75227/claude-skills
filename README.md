@@ -5,6 +5,7 @@
 ## 目前收錄
 
 - **test-plan-builder**：依RFP需求、SA文件、會議紀錄與驗收條款，建立可雙向追溯的測試計畫。詳見該資料夾內的 SKILL.md。
+- **docx-fill-images**：把截圖依序插進 docx 的「【此處貼圖】」佔位，自動配欄寬、裁 macOS 選單列、防尾端空白頁、產完自檢（佔位、圖片關聯、更新功能變數旗標）。只用 zipfile 改 XML，不經 python-docx 存檔。
 - **notebooklm**：透過 notebooklm-py CLI 操作 Google NotebookLM（建筆記本、加來源、問答、產生/下載各類產出）。轉載自 [teng-lin/notebooklm-py](https://github.com/teng-lin/notebooklm-py)（MIT 授權，v0.7.3），未修改。使用前需先安裝並登入：`uv tool install "notebooklm-py[browser]"` → `notebooklm login` → `notebooklm auth check --test --json`。登入憑證存在本機 `~/.notebooklm/`，請各自用自己的 Google 帳號登入，勿互相複製。
 
 ## 使用方式
@@ -12,6 +13,10 @@
 複製對應資料夾到你的 `.claude/skills/` 底下即可。內容供參考與調整，實際使用時請依自己專案的素材與情境判斷，不保證直接適用。
 
 ## 更新紀錄
+
+### docx-fill-images
+
+- **2026-10-28**：收錄。
 
 ### notebooklm
 
