@@ -9,12 +9,17 @@
 - **notebooklm**：透過 notebooklm-py CLI 操作 Google NotebookLM（建筆記本、加來源、問答、產生/下載各類產出）。轉載自 [teng-lin/notebooklm-py](https://github.com/teng-lin/notebooklm-py)（MIT 授權，v0.7.3），未修改。使用前需先安裝並登入：`uv tool install "notebooklm-py[browser]"` → `notebooklm login` → `notebooklm auth check --test --json`。登入憑證存在本機 `~/.notebooklm/`，請各自用自己的 Google 帳號登入，勿互相複製。
 
 - **pm-weekly-agenda**：從 Google Sheets 的議程總表＋值日生輪值表，自動排出 PM 週會議程 xlsx（主管列管專案上半場自動配時段、請假／出差標註、週二取消併週四、離職者專案改掛）。第一次使用請把 SKILL.md 開頭「固定來源」換成自己的兩個 Google Sheets 連結；需搭配 Google Drive 連接器讀取，產檔用 `scripts/generate_agenda.py`（需 openpyxl）。
+- **system-test-screenshot**：用 Playwright 做系統實機測試＋紅框截圖佐證＋測試報告。依素材分四個流程（批次截頁／Word 測試步驟自動截圖／依需求或 bug 單自行設計測試／照測試計畫書逐項執行），內含多角色登入（session 復用、驗證碼人工輸入）、紅框標註、Excel 背景截圖、報告截圖格盤點，以及「通過／未通過／未執行／非缺陷」判定紀律。第一次使用請依 `roles.py` 開頭說明在該資料夾建立 `.env`（登入網址、欄位 selector、各角色帳密；勿進 git）；需 `pip install playwright pillow python-docx` 與 `playwright install chromium`，Excel 截圖限 macOS。
 
 ## 使用方式
 
 複製對應資料夾到你的 `.claude/skills/` 底下即可。內容供參考與調整，實際使用時請依自己專案的素材與情境判斷，不保證直接適用。
 
 ## 更新紀錄
+
+### system-test-screenshot
+
+- **2026-11-05**：收錄。
 
 ### pm-weekly-agenda
 
