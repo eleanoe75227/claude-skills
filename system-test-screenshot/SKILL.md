@@ -32,7 +32,7 @@ description: 系統實機測試＋截圖佐證＋測試報告（Playwright）：
 | `roles.py` | 通用多角色登入（各角色各存一份 session；失效彈窗、帳密自動填好、人工輸驗證碼）；`--check` 檢查各角色是否同帳號、session 是否有效 |
 | `capture.py` | 批次截頁（用 roles.py 登入）；`--role`、`--out` |
 | `annotate.py` | 紅框＋箭頭標註（`from annotate import annotate_page as redbox`）；多個動作點用 `annotate_multi`（編號框、不畫箭頭）；操作手冊用 `annotate_manual`（細框＋編號圓圈） |
-| `excel_shot.py` | macOS 背景開 Excel 截圖（自動點掉格式對話框，不搶前景）；需 pyobjc Quartz，裝不起來就改 LibreOffice 轉 html/PDF 再截 |
+| `excel_shot.py` | **限 macOS**：背景開 Excel 截圖（自動點掉格式對話框，不搶前景）；需 pyobjc Quartz，裝不起來就改 LibreOffice 轉 html/PDF 再截 |
 | `assist_login.py` | 正式機協作登入（使用者本人操作，如自然人憑證／單一簽入）＋每次換頁自動截圖；成功／出現提示字樣／閒置／總時限任一成立就結束 |
 | `report_status.py` | 測試報告 docx 截圖格盤點：已插圖／待補／【說明】／空白／【請SA確認】格數，`--detail` 列缺哪幾格 |
 | `.env` | 帳密與登入設定（**務必 gitignore**） |
@@ -125,4 +125,5 @@ Word 格式約定：**非空段落＝測試步驟，緊接的空段落＝截圖�
 
 ## 資安底線（強制，違反即停）
 - 帳密只存本機 `.env`；程式與回覆**都不印密碼**。`.env`、session 檔、截圖、產出的 docx 一律不進 git。
+- **session 檔（`session_*.json`）等同登入憑證**，預設存在目前目錄的 `outputs/截圖測試/`（`.env` 的 `APP_OUT` 可改）；若在自己的專案 repo 裡跑，記得把該資料夾加進專案的 `.gitignore`。
 - **正式機／含個資截圖**（身分證字號、本人帳號、公司名）：插報告前先打碼；不能用的原圖移到 `_勿用/` 子資料夾，不要跟可用圖混放；報告定版後含個資的原圖一併刪除。

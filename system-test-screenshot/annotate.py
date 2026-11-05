@@ -5,6 +5,15 @@ import math
 from PIL import Image, ImageDraw
 
 RED=(230,0,0)
+
+def _font(size):
+    """跨平台粗體字型：macOS → Windows → Linux，都找不到用 Pillow 內建字型"""
+    from PIL import ImageFont
+    for f in ("/System/Library/Fonts/Supplemental/Arial Bold.ttf", "C:/Windows/Fonts/arialbd.ttf",
+              "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"):
+        try: return ImageFont.truetype(f, size)
+        except OSError: pass
+    return ImageFont.load_default()
 BOX_W=7      # 紅框粗細(原本4→加粗)
 ARROW_W=8    # 箭頭粗細
 ARROW_LEN=120  # 箭尾離框距離
@@ -47,7 +56,7 @@ def annotate_multi(img_path, boxes, out_path, pad=6):
     from PIL import ImageFont
     boxes=[b for b in boxes if b]
     if len(boxes)==1: return annotate(img_path, boxes[0], out_path, pad)
-    font=ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Bold.ttf", 26)
+    font=_font(26)
     im=Image.open(img_path).convert("RGB"); d=ImageDraw.Draw(im)
     for i,b in enumerate(boxes,1):
         x0,y0,x1,y1=b["x"]-pad,b["y"]-pad,b["x"]+b["width"]+pad,b["y"]+b["height"]+pad
@@ -64,7 +73,7 @@ def annotate_manual(img_path, boxes, out_path, pad=5, box_w=3, badge_d=26, numbe
     number=False 時只畫框不編號。"""
     from PIL import ImageFont
     boxes=[b for b in boxes if b]
-    font=ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Bold.ttf", int(badge_d*0.72))
+    font=_font(int(badge_d*0.72))
     im=Image.open(img_path).convert("RGB"); d=ImageDraw.Draw(im)
     for i,b in enumerate(boxes,1):
         x0,y0,x1,y1=b["x"]-pad,b["y"]-pad,b["x"]+b["width"]+pad,b["y"]+b["height"]+pad
@@ -86,7 +95,8 @@ if __name__=="__main__":
     im=Image.new("RGB",(900,500),(245,247,250)); d=ImageDraw.Draw(im)
     d.rectangle([560,300,700,360], fill=(60,130,200))  # 假按鈕
     d.text((585,322),"匯出Excel",fill=(255,255,255))
-    im.save("/tmp/_demo.png")
-    annotate("/tmp/_demo.png", {"x":560,"y":300,"width":140,"height":60},
-             "/tmp/_demo_annotated.png")
-    print("示意圖已產出")
+    import tempfile, os; tmp=tempfile.gettempdir()
+    im.save(os.path.join(tmp,"_demo.png"))
+    annotate(os.path.join(tmp,"_demo.png"), {"x":560,"y":300,"width":140,"height":60},
+             os.path.join(tmp,"_demo_annotated.png"))
+    print("示意圖已產出：", os.path.join(tmp,"_demo_annotated.png"))
